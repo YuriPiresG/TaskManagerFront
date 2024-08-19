@@ -1,25 +1,38 @@
-import React from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+"use client";
+import { useForm, SubmitHandler, useWatch } from "react-hook-form";
 import { TaskStatus } from "../enums/TaskStatus";
-import { createTask } from "../../../actions/actions";
+import { createTask, updateTask } from "../../../actions/actions";
 import { Task } from "../types/Task";
 import { MdOutlineClose } from "react-icons/md";
 
 type CreateUpdateFormProps = {
+  id?: number;
   onClose: () => void;
+  type: "create" | "update";
 };
 
-const CreateUpdateForm = ({ onClose }: CreateUpdateFormProps) => {
+const CreateUpdateForm = ({ onClose, type, id }: CreateUpdateFormProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm<Task>();
 
   const onSubmit: SubmitHandler<Task> = (data) => {
-    createTask(data);
-    onClose();
+    switch (type) {
+      case "create":
+        createTask(data);
+        onClose();
+      case "update":
+        updateTask(id!, data);
+        onClose();
+    }
   };
+  const status = useWatch({
+    control,
+    name: "status",
+  });
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -83,6 +96,23 @@ const CreateUpdateForm = ({ onClose }: CreateUpdateFormProps) => {
               <p className="text-red-500">{errors.status.message}</p>
             )}
           </div>
+
+          {status === TaskStatus.COMPLETED && (
+            <div>
+              <label htmlFor="finishedDate">Data de Conclusão</label>
+              <input
+                type="date"
+                id="finishedDate"
+                {...register("finishedAt", {
+                  required: "Data de conclusão é obrigatória",
+                })}
+                className="border p-2 rounded w-full"
+              />
+              {errors.finishedAt && (
+                <p className="text-red-500">{errors.finishedAt.message}</p>
+              )}
+            </div>
+          )}
 
           <button type="submit" className="bg-blue-500 text-white p-2 rounded">
             Salvar
