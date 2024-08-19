@@ -3,6 +3,7 @@ import { getTaskById } from "../../../../actions/actions";
 import { Task } from "../../types/Task";
 import { TaskStatus } from "@/app/enums/TaskStatus";
 import Link from "next/link";
+import DeleteTaskButton from "@/app/components/DeleteTaskButton";
 
 type Props = {
   params: {
@@ -41,12 +42,18 @@ const TaskDetails = async ({ params }: Props) => {
               : "ainda não finalizado"}
           </p>
         )}
-        <Link
-          href="/tasks"
-          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-        >
-          Voltar
-        </Link>
+        <div className="flex gap-2">
+          <Link
+            href="/tasks"
+            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+          >
+            Voltar
+          </Link>
+          <DeleteTaskButton type={"task"} taskId={task.id} />
+          <button className="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600">
+            Atualizar
+          </button>
+        </div>
       </div>
     </div>
   );

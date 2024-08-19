@@ -56,12 +56,13 @@ const TaskCard = (task: Task) => {
       </p>
 
       <p className="text-sm mb-4">
-        Finalizada: {finishedAt ? finishedAt.toLocaleDateString("pt-br") : "Não"}
+        Finalizada:{" "}
+        {finishedAt ? finishedAt.toLocaleDateString("pt-br") : "Não"}
       </p>
 
       <Link
         href={`/tasks/${task.id}`}
-        className="bg-blue-500 text-white text-center py-2 px-4 rounded hover:bg-blue-600 transition-colors"
+        className="bg-blue-500 text-white text-center py-2 px-4 rounded hover:bg-blue-600 transition-colors mb-2"
       >
         Detalhes
       </Link>

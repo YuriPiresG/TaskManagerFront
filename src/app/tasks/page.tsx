@@ -1,4 +1,6 @@
 import { getTasks } from "../../../actions/actions";
+import ConfirmDelete from "../components/ConfirmDelete";
+import DeleteTaskButton from "../components/DeleteTaskButton";
 import TaskCard from "../components/TaskCard";
 import ToggleTaskPage from "../components/ToggleTaskPage";
 import { Task } from "../types/Task";
@@ -14,6 +16,8 @@ export default async function Home() {
         ))}
         <div className="w-[15rem] h-[20rem] font-light grid rounded-xl justify-center items-center border bg-green-300 border-gray-400 shadow-2xl">
           <ToggleTaskPage />
+          <DeleteTaskButton type="all" />
+          <DeleteTaskButton type="completed" />
         </div>
       </div>
     </div>
