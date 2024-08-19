@@ -4,6 +4,7 @@ import { Task } from "../../types/Task";
 import { TaskStatus } from "@/app/enums/TaskStatus";
 import Link from "next/link";
 import DeleteTaskButton from "@/app/components/DeleteTaskButton";
+import { CreateOrUpdateButton } from "@/app/components/CreateUpdateBtn";
 
 type Props = {
   params: {
@@ -50,9 +51,7 @@ const TaskDetails = async ({ params }: Props) => {
             Voltar
           </Link>
           <DeleteTaskButton type={"task"} taskId={task.id} />
-          <button className="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600">
-            Atualizar
-          </button>
+          <CreateOrUpdateButton type="update" id={task.id} />
         </div>
       </div>
     </div>

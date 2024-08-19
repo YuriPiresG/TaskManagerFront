@@ -1,7 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { deleteAllTasks, deleteTask } from "../../../actions/actions";
+import {
+  deleteAllTasks,
+  deleteCompletedTasks,
+  deleteTask,
+} from "../../../actions/actions";
 
 type ConfirmDeleteProps = {
   taskId?: number;
@@ -31,7 +35,7 @@ const ConfirmDelete = ({
           await deleteAllTasks();
           break;
         case "completed":
-          await deleteAllTasks();
+          await deleteCompletedTasks();
           break;
         default:
           console.error("Invalid type:", type);

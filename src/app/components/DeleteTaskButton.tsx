@@ -39,7 +39,7 @@ const DeleteTaskButton = ({ taskId, type }: DeleteTaskButtonProps) => {
     <div>
       <button
         onClick={handleOpenConfirmDelete}
-        className="bg-red-500 text-white py-2 px-4 w-56 rounded hover:bg-red-600"
+        className="bg-red-500 text-white h-12 w-40 rounded hover:bg-red-600"
       >
         Excluir {getButtonText()}
       </button>

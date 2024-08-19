@@ -37,6 +37,7 @@ export const createTask = async (task: Task) => {
   revalidateTag("tasks");
   return response.json();
 };
+
 export const updateTask = async (id: number, task: Task) => {
   const response = await fetch(`${API}/${id}`, {
     method: "PUT",
